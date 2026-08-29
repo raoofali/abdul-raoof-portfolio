@@ -99,6 +99,61 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  { slug: 'gym-management-system', name: 'Gym Management System', tagline: 'Complete gym operations & membership management platform', description: 'A full-stack MERN gym management platform built to centralize member registration, membership plans, fee collection, attendance, renewals, and daily gym operations in one responsive dashboard.', problem: 'Gym operations were often handled through paper registers and spreadsheets, making it difficult to track members, membership plans, fee payments, renewals, and overall gym activity efficiently.', solution: 'Built a centralized role-based management system that allows gym owners to manage members, membership packages, fees, registrations, and operational data through a responsive dashboard, with secure authentication and cloud-based member profile images.', stack: [ 'React.js', 'Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'Tailwind CSS', 'Material UI Icons', 'Cloudinary', 'JWT', ], features: [ 'Member registration & complete member management', 'Secure authentication & role-based owner access', 'Membership plans & package management', 'Monthly fee collection & payment tracking', 'Membership status & renewal tracking', 'Member profile image uploads with Cloudinary', 'Dashboard with gym performance insights', 'Search, filtering & organized member records', 'Responsive admin interface for desktop and mobile', 'RESTful backend API with MongoDB persistence', ], github: 'https://github.com/raoofali/gym-management-system-complete', live: 'https://gym-management-system-complete.vercel.app/login', featured: true, hasScreenshots: true, screenshots: [ '/projects/gym-dashboard1.png', '/projects/gym-members1.png', '/projects/gym-fees1.png', '/projects/gym-login1.png', ], },
+
+    {
+    slug: 'bazaar',
+    name: 'Bazaar',
+    tagline: 'Production-style MERN e-commerce platform',
+    description:
+      'A full-stack e-commerce platform built with the MERN stack, featuring a premium storefront, complete customer account system, and a powerful admin dashboard for managing products, orders, users, coupons, and inventory.',
+    problem:
+      'E-commerce businesses need a reliable platform that can handle the complete customer journey while giving administrators centralized control over products, orders, customers, inventory, and promotions.',
+    solution:
+      'Built Bazaar as a full-stack MERN platform with customer and admin experiences, JWT authentication, backend-authoritative pricing, product and inventory management, cart and wishlist functionality, checkout, order tracking, reviews, coupons, and analytics.',
+    stack: [
+      'React 19',
+      'Vite',
+      'Tailwind CSS',
+      'Node.js',
+      'Express.js',
+      'MongoDB',
+      'Mongoose',
+      'JWT',
+      'Axios',
+    ],
+    features: [
+      'Product browsing, search, filtering & pagination',
+      'JWT authentication with customer accounts',
+      'Cart, wishlist & product comparison',
+      'Multi-step checkout with COD/Card/Mock Payment',
+      'Order tracking & cancellation',
+      'Product reviews & related products',
+      'Admin dashboard with analytics',
+      'Product, order & user management',
+      'Coupon & inventory management',
+      'Backend-authoritative pricing and stock validation',
+    ],
+    github: 'https://github.com/raoofali/bazaar',
+    live: 'https://bazaar-orpin.vercel.app/ ',
+    featured: true,
+    hasScreenshots: false,
+    screenshots: [
+  '/projects/bazaar-home.png',
+  '/projects/bazaar-shop.png',
+  '/projects/bazaar-product.png',
+  '/projects/bazaar-admin.png',
+],
+  },
+  { slug: 'developer-portfolio', name: 'Developer Portfolio', tagline: 'Modern personal portfolio for showcasing projects, skills & experience', description: 'A modern, responsive developer portfolio built to showcase my technical skills, full-stack projects, professional experience, education, and journey as a Full Stack MERN Developer.', problem: 'Developers need more than a simple resume to demonstrate their technical capabilities. A portfolio should present real projects, technical decisions, experience, and skills through a clear and professional digital experience.', solution: 'Built a responsive personal portfolio with dedicated sections for projects, skills, experience, education, and professional information. The site uses reusable React components, structured project data, interactive screenshot galleries, animations, and SEO-friendly metadata.', stack: [ 'React.js', 'TypeScript', 'Vite', 'Tailwind CSS', 'Lucide React', 'React Helmet', ], features: [ 'Responsive personal portfolio design', 'Project case studies with problem & solution sections', 'Interactive project screenshot galleries', 'Technical skills organized by category', 'Professional experience & education sections', 'Reusable React component architecture', 'Animated reveal interactions', 'SEO-friendly page titles & metadata', 'Mobile-first responsive interface', 'Professional social & contact integration', ], github: 'https://github.com/raoofali/abdul-raoof-portfolio', live: 'https://abdul-raoof-portfolio-two.vercel.app/', featured: true, hasScreenshots: true, 
+    screenshots: [
+  '/projects/portfolio-home.png',
+  '/projects/portfolio-projects.png',
+  '/projects/portfolio-skills.png',
+  '/projects/portfolio-mobile.png',
+],
+
+  },
   {
     slug: 'gym-management-system',
     name: 'Gym Management System',
@@ -153,7 +208,7 @@ export const projects: Project[] = [
     github: '',
     live: '',
     featured: false,
-    hasScreenshots: false,
+    hasScreenshots: true,
   },
 ];
 
