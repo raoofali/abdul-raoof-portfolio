@@ -1,13 +1,11 @@
-import CountUp from 'react-countup';
-import { projects, skills } from '@/data/profile';
+
 import { Reveal } from '@/components/ui/Reveal';
 
-const allSkills = Object.values(skills).flat();
-
-const stats = [
-  { label: 'Projects built', value: projects.length, suffix: '+' },
-  { label: 'Technologies used', value: allSkills.length, suffix: '+' },
-  { label: 'Experience', value: 3, suffix: '+' },
+const highlights = [
+  '3+ Years Experience',
+  '20+ Projects',
+  'Full-Stack Development',
+  'Real-time Systems',
 ];
 
 export function Stats() {
@@ -15,24 +13,23 @@ export function Stats() {
     <section className="border-t border-border py-14 sm:py-16">
       <div className="container-page">
         <Reveal>
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="font-display text-3xl font-bold text-ink sm:text-4xl">
-                  <CountUp
-                    end={stat.value}
-                    duration={1.8}
-                    enableScrollSpy
-                    scrollSpyOnce
-                  />
-                  {stat.suffix}
-                </p>
+          <div>
+            <h3 className="mb-6 text-center font-display text-xl font-bold text-ink">
+              Quick Highlights
+            </h3>
 
-                <p className="mt-2 font-mono text-xs uppercase tracking-wide text-ink-tertiary">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {highlights.map((highlight) => (
+                <div
+                  key={highlight}
+                  className="rounded-xl border border-border px-5 py-4 text-center"
+                >
+                  <p className="font-mono text-sm font-medium text-ink">
+                    {highlight}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </Reveal>
       </div>
