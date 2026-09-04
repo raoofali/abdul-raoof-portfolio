@@ -5,6 +5,8 @@ import { useLocation } from 'react-router-dom';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollToTop } from '@/components/layout/ScrollToTop';
+import { ScrollProgress } from '@/components/layout/ScrollProgress';
+import { BackToTop } from '@/components/layout/BackToTop';
 
 // Lazy-loaded routes — dynamic imports enable automatic code splitting per page
 const Home = lazy(() => import('@/pages/Home'));
@@ -52,12 +54,24 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <div className="flex min-h-screen flex-col">
+      {/* Visually hidden until focused — lets keyboard/screen-reader users
+          jump straight to content instead of tabbing through the whole nav
+          on every single page. */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-accent focus:px-4 focus:py-2 focus:font-mono focus:text-sm focus:text-white"
+      >
+        Skip to content
+      </a>
+
+      <ScrollProgress />
       <ScrollToTop />
       <Navbar />
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         <AnimatedRoutes />
       </main>
       <Footer />
+      <BackToTop />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { Hero } from '@/components/sections/Hero';
+import { Stats } from '@/components/sections/Stats';
 import { About } from '@/components/sections/About';
 import { Skills } from '@/components/sections/Skills';
 import { FeaturedProjects } from '@/components/sections/FeaturedProjects';
@@ -17,6 +18,7 @@ export default function Home() {
         />
       </Helmet>
       <Hero />
+      <Stats />
       <About />
       <Skills />
       <FeaturedProjects />
