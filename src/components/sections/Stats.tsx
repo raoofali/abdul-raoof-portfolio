@@ -1,17 +1,13 @@
 import CountUp from 'react-countup';
-import { projects, skills, experience } from '@/data/profile';
+import { projects, skills } from '@/data/profile';
 import { Reveal } from '@/components/ui/Reveal';
 
 const allSkills = Object.values(skills).flat();
 
-// All numbers below are computed from your real data in profile.ts —
-// nothing here is a made-up marketing number. Update profile.ts and
-// these counts update themselves.
 const stats = [
   { label: 'Projects built', value: projects.length, suffix: '+' },
   { label: 'Technologies used', value: allSkills.length, suffix: '+' },
-  { label: 'Internship completed', value: experience.length, suffix: '' },
-  { label: 'Graduated', value: 2025, suffix: '' },
+  { label: 'Experience', value: 3, suffix: '+' },
 ];
 
 export function Stats() {
@@ -31,6 +27,7 @@ export function Stats() {
                   />
                   {stat.suffix}
                 </p>
+
                 <p className="mt-2 font-mono text-xs uppercase tracking-wide text-ink-tertiary">
                   {stat.label}
                 </p>
