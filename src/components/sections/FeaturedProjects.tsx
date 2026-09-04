@@ -6,7 +6,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Badge } from '@/components/ui/Badge';
 import { Reveal } from '@/components/ui/Reveal';
 
-function FeaturedProjectCard({ project }: { project: Project }) {
+function FeaturedProjectCard({ project, index }: { project: Project; index: number }) {
   const screenshots = project.screenshots ?? [];
 
   const [activeScreenshot, setActiveScreenshot] = useState(
@@ -22,10 +22,10 @@ function FeaturedProjectCard({ project }: { project: Project }) {
         {/* LEFT: PROJECT INFORMATION */}
         <div className="p-6 sm:p-8 lg:col-span-2 lg:p-10">
 
-          {/* Project number */}
+          {/* Project number — was hardcoded to "01" on every card before */}
           <div className="mb-5 flex items-center gap-3">
             <span className="font-mono text-xs text-ink-tertiary">
-              01
+              {String(index + 1).padStart(2, '0')}
             </span>
 
             <span className="h-px w-8 bg-border" />
@@ -112,7 +112,7 @@ function FeaturedProjectCard({ project }: { project: Project }) {
         <div className="relative flex flex-col justify-center bg-bg-elevated/40 p-4 sm:p-6 lg:col-span-3 lg:p-8">
 
           {/* Browser-style screenshot frame */}
-          <div className="relative overflow-hidden rounded-xl border border-border bg-bg-raised group-hover:scale-[1.035] shadow-card">
+          <div className="relative overflow-hidden rounded-xl border border-border bg-bg-raised group-hover:scale-[1.035] shadow-card transition-transform duration-300">
 
             {/* Browser top bar */}
             <div className="flex h-9 items-center gap-1.5 border-b border-border bg-bg-elevated px-3">
@@ -127,13 +127,15 @@ function FeaturedProjectCard({ project }: { project: Project }) {
               </div>
             </div>
 
-            {/* Main Screenshot */}
-            <div className="relative aspect-[16/10] overflow-hidden bg-bg">
+            {/* Main Screenshot — object-contain so the full screenshot is
+                always visible instead of object-cover cropping content off
+                the left/right edges (the bug seen on the live mobile build) */}
+            <div className="relative aspect-[16/10] overflow-hidden bg-bg-elevated">
               {activeScreenshot ? (
                 <img
                   src={activeScreenshot}
                   alt={`${project.name} preview`}
-                  className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                  className="h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                 />
               ) : (
                 <div className="flex h-full items-center justify-center font-mono text-sm text-ink-tertiary">
@@ -149,22 +151,22 @@ function FeaturedProjectCard({ project }: { project: Project }) {
           {/* Screenshot thumbnails */}
           {screenshots.length > 1 && (
             <div className="mt-4 flex gap-3 overflow-x-auto pb-1">
-              {screenshots.slice(0, 4).map((screenshot, index) => (
+              {screenshots.slice(0, 4).map((screenshot, i) => (
                 <button
                   key={screenshot}
                   type="button"
                   onClick={() => setActiveScreenshot(screenshot)}
-                  className={`group/thumb relative h-16 w-24 shrink-0 overflow-hidden rounded-md border transition-all duration-200 sm:h-20 sm:w-28 ${
+                  className={`group/thumb relative h-16 w-24 shrink-0 overflow-hidden rounded-md border bg-bg-elevated transition-all duration-200 sm:h-20 sm:w-28 ${
                     activeScreenshot === screenshot
                       ? 'border-accent shadow-glow'
                       : 'border-border opacity-60 hover:border-accent/50 hover:opacity-100'
                   }`}
-                  aria-label={`View screenshot ${index + 1}`}
+                  aria-label={`View screenshot ${i + 1}`}
                 >
                   <img
                     src={screenshot}
                     alt=""
-                    className="h-full w-full object-cover object-top transition-transform duration-300 group-hover/thumb:scale-105"
+                    className="h-full w-full object-contain transition-transform duration-300 group-hover/thumb:scale-105"
                   />
 
                   {activeScreenshot === screenshot && (
@@ -212,7 +214,7 @@ export function FeaturedProjects() {
               key={project.slug}
               delay={i * 0.08}
             >
-              <FeaturedProjectCard project={project} />
+              <FeaturedProjectCard project={project} index={i} />
             </Reveal>
           ))}
         </div>

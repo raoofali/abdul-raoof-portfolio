@@ -1,10 +1,30 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion';
 import { ArrowRight, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { profile } from '@/data/profile';
 import { EditorWindow } from '@/components/ui/EditorWindow';
+import { RotatingText } from '@/components/ui/RotatingText';
 
 export function Hero() {
+  const visualRef = useRef<HTMLDivElement>(null);
+  const prefersReduced = useReducedMotion();
+
+  // Cursor-tracked glow — follows the pointer within the hero visual with a
+  // soft spring lag instead of snapping instantly, replacing the old static
+  // blurred circle that never moved.
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const glowX = useSpring(mouseX, { stiffness: 60, damping: 20 });
+  const glowY = useSpring(mouseY, { stiffness: 60, damping: 20 });
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (prefersReduced || !visualRef.current) return;
+    const rect = visualRef.current.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left - rect.width / 2);
+    mouseY.set(e.clientY - rect.top - rect.height / 2);
+  };
+
   return (
     <section className="relative overflow-hidden pb-20 pt-16 sm:pt-24">
       <div className="container-page grid items-center gap-14 lg:grid-cols-2 lg:gap-10">
@@ -31,11 +51,12 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.05 }}
-className="font-display text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl"          >
+            className="font-display text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl"
+          >
             {profile.name}
 
-            <span className="mt-2 block font-display text-2xl font-semibold text-ink-secondary sm:text-3xl">
-              {profile.title}
+            <span className="mt-2 block min-h-[1.2em] font-display text-2xl font-semibold text-ink-secondary sm:text-3xl">
+              <RotatingText words={profile.titles} />
             </span>
           </motion.h1>
 
@@ -82,15 +103,22 @@ className="font-display text-4xl font-bold leading-[1.1] sm:text-5xl lg:text-6xl
 
         {/* RIGHT HERO VISUAL */}
         <motion.div
+          ref={visualRef}
+          onPointerMove={handlePointerMove}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
           className="relative flex min-h-[520px] flex-col items-center justify-start"
         >
 
-          {/* Subtle background glow */}
-          <div
-            className="pointer-events-none absolute left-1/2 top-16 h-72 w-72 -translate-x-1/2 rounded-full bg-accent/10 blur-3xl"
+          {/* Cursor-tracked glow */}
+          <motion.div
+            className="pointer-events-none absolute left-1/2 top-16 h-72 w-72 rounded-full bg-accent/10 blur-3xl"
+            style={{
+              x: glowX,
+              y: glowY,
+              translateX: '-50%',
+            }}
           />
 
           {/* PROFILE IMAGE */}

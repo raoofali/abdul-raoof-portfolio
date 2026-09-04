@@ -21,15 +21,14 @@ export const profile = {
   longBio:
     "I'm a Full Stack MERN Developer who enjoys turning real problems into clean, usable software. My focus is React.js, TypeScript, and Tailwind CSS on the frontend, paired with Node.js, Express, and MongoDB on the backend. I care about interfaces that feel obvious to use and code that's easy for the next person — often future me — to maintain. Right now I'm deepening my TypeScript and expanding into Python, machine learning, and AI engineering, aiming to build systems that are both well-engineered and genuinely intelligent.",
 
-  // TODO: drop your real files into /public and update these paths
-  resumeUrl: '/resume.pdf', // placeholder — see public/resume-PLACEHOLDER.md
-  photoUrl: '/profile.png', // placeholder — add a square photo here
+  resumeUrl: '/resume.pdf',
+  photoUrl: '/profile.png',
   hasRealPhoto: true,
 
   social: {
     github: 'https://github.com/raoofali',
     linkedin: 'https://www.linkedin.com/in/abdul-raoof-b666861b1',
-    
+
     // TODO: add if/when available
     twitter: '',
     leetcode: '',
@@ -98,10 +97,59 @@ export interface Project {
   screenshots?: string[];
 }
 
+// NOTE: there used to be two separate objects both using
+// slug: 'gym-management-system' (one pointing at the newer
+// "-complete" repo/screenshots, one at an older repo). Duplicate
+// slugs break React's list keys and caused this project to render
+// twice in "Featured work" on the homepage. Kept only the newer,
+// more complete version below.
 export const projects: Project[] = [
-  { slug: 'gym-management-system', name: 'Gym Management System', tagline: 'Complete gym operations & membership management platform', description: 'A full-stack MERN gym management platform built to centralize member registration, membership plans, fee collection, attendance, renewals, and daily gym operations in one responsive dashboard.', problem: 'Gym operations were often handled through paper registers and spreadsheets, making it difficult to track members, membership plans, fee payments, renewals, and overall gym activity efficiently.', solution: 'Built a centralized role-based management system that allows gym owners to manage members, membership packages, fees, registrations, and operational data through a responsive dashboard, with secure authentication and cloud-based member profile images.', stack: [ 'React.js', 'Node.js', 'Express.js', 'MongoDB', 'Mongoose', 'Tailwind CSS', 'Material UI Icons', 'Cloudinary', 'JWT', ], features: [ 'Member registration & complete member management', 'Secure authentication & role-based owner access', 'Membership plans & package management', 'Monthly fee collection & payment tracking', 'Membership status & renewal tracking', 'Member profile image uploads with Cloudinary', 'Dashboard with gym performance insights', 'Search, filtering & organized member records', 'Responsive admin interface for desktop and mobile', 'RESTful backend API with MongoDB persistence', ], github: 'https://github.com/raoofali/gym-management-system-complete', live: 'https://gym-management-system-complete.vercel.app/login', featured: true, hasScreenshots: true, screenshots: [ '/projects/gym-dashboard1.png', '/projects/gym-members1.png', '/projects/gym-fees1.png', '/projects/gym-login1.png', ], },
+  {
+    slug: 'gym-management-system',
+    name: 'Gym Management System',
+    tagline: 'Complete gym operations & membership management platform',
+    description:
+      'A full-stack MERN gym management platform built to centralize member registration, membership plans, fee collection, attendance, renewals, and daily gym operations in one responsive dashboard.',
+    problem:
+      'Gym operations were often handled through paper registers and spreadsheets, making it difficult to track members, membership plans, fee payments, renewals, and overall gym activity efficiently.',
+    solution:
+      'Built a centralized role-based management system that allows gym owners to manage members, membership packages, fees, registrations, and operational data through a responsive dashboard, with secure authentication and cloud-based member profile images.',
+    stack: [
+      'React.js',
+      'Node.js',
+      'Express.js',
+      'MongoDB',
+      'Mongoose',
+      'Tailwind CSS',
+      'Material UI Icons',
+      'Cloudinary',
+      'JWT',
+    ],
+    features: [
+      'Member registration & complete member management',
+      'Secure authentication & role-based owner access',
+      'Membership plans & package management',
+      'Monthly fee collection & payment tracking',
+      'Membership status & renewal tracking',
+      'Member profile image uploads with Cloudinary',
+      'Dashboard with gym performance insights',
+      'Search, filtering & organized member records',
+      'Responsive admin interface for desktop and mobile',
+      'RESTful backend API with MongoDB persistence',
+    ],
+    github: 'https://github.com/raoofali/gym-management-system-complete',
+    live: 'https://gym-management-system-complete.vercel.app/login',
+    featured: true,
+    hasScreenshots: true,
+    screenshots: [
+      '/projects/gym-dashboard1.png',
+      '/projects/gym-members1.png',
+      '/projects/gym-fees1.png',
+      '/projects/gym-login1.png',
+    ],
+  },
 
-    {
+  {
     slug: 'bazaar',
     name: 'Bazaar',
     tagline: 'Production-style MERN e-commerce platform',
@@ -135,63 +183,52 @@ export const projects: Project[] = [
       'Backend-authoritative pricing and stock validation',
     ],
     github: 'https://github.com/raoofali/bazaar',
-    live: 'https://bazaar-orpin.vercel.app/ ',
+    live: 'https://bazaar-orpin.vercel.app/',
     featured: true,
-    hasScreenshots: false,
-    screenshots: [
-  '/projects/bazaar-home.png',
-  '/projects/bazaar-shop.png',
-  '/projects/bazaar-product.png',
-  '/projects/bazaar-admin.png',
-],
+    // FIXED: this used to list bazaar-home.png / bazaar-product.png /
+    // bazaar-admin.png, none of which exist in public/projects — only
+    // bazaar-shop.png does, so 3 of 4 thumbnails were broken images.
+    // Add the real screenshots to public/projects and extend this array
+    // whenever you have them; for now it only references what's real.
+    hasScreenshots: true,
+    screenshots: ['/projects/bazaar-shop.png'],
   },
-  { slug: 'developer-portfolio', name: 'Developer Portfolio', tagline: 'Modern personal portfolio for showcasing projects, skills & experience', description: 'A modern, responsive developer portfolio built to showcase my technical skills, full-stack projects, professional experience, education, and journey as a Full Stack MERN Developer.', problem: 'Developers need more than a simple resume to demonstrate their technical capabilities. A portfolio should present real projects, technical decisions, experience, and skills through a clear and professional digital experience.', solution: 'Built a responsive personal portfolio with dedicated sections for projects, skills, experience, education, and professional information. The site uses reusable React components, structured project data, interactive screenshot galleries, animations, and SEO-friendly metadata.', stack: [ 'React.js', 'TypeScript', 'Vite', 'Tailwind CSS', 'Lucide React', 'React Helmet', ], features: [ 'Responsive personal portfolio design', 'Project case studies with problem & solution sections', 'Interactive project screenshot galleries', 'Technical skills organized by category', 'Professional experience & education sections', 'Reusable React component architecture', 'Animated reveal interactions', 'SEO-friendly page titles & metadata', 'Mobile-first responsive interface', 'Professional social & contact integration', ], github: 'https://github.com/raoofali/abdul-raoof-portfolio', live: 'https://abdul-raoof-portfolio-two.vercel.app/', featured: true, hasScreenshots: true, 
-    screenshots: [
-  '/projects/portfolio-home.png',
-  '/projects/portfolio-projects.png',
-  '/projects/portfolio-skills.png',
-  '/projects/portfolio-mobile.png',
-],
 
-  },
   {
-    slug: 'gym-management-system',
-    name: 'Gym Management System',
-    tagline: 'Full-stack MERN app for running a gym end to end',
+    slug: 'developer-portfolio',
+    name: 'Developer Portfolio',
+    tagline: 'Modern personal portfolio for showcasing projects, skills & experience',
     description:
-      'A complete gym operations platform covering member registration, attendance, subscription plans, and payments — built to replace manual, paper-based tracking.',
+      'A modern, responsive developer portfolio built to showcase my technical skills, full-stack projects, professional experience, education, and journey as a Full Stack MERN Developer.',
     problem:
-      'Gym owners were managing members, fees, and renewals manually across registers and spreadsheets, leading to missed renewals and no visibility into overall performance.',
+      'Developers need more than a simple resume to demonstrate their technical capabilities. A portfolio should present real projects, technical decisions, experience, and skills through a clear and professional digital experience.',
     solution:
-      'Built a role-based MERN application with an owner panel, automated fee/subscription tracking, and image-backed member profiles via Cloudinary — turning a manual process into a single dashboard.',
-    stack: [
-      'React.js',
-      'Node.js',
-      'Express.js',
-      'MongoDB',
-      'Tailwind CSS',
-      'Material UI Icons',
-      'Cloudinary',
-    ],
+      'Built a responsive personal portfolio with dedicated sections for projects, skills, experience, education, and professional information. The site uses reusable React components, structured project data, interactive screenshot galleries, animations, and SEO-friendly metadata.',
+    stack: ['React.js', 'TypeScript', 'Vite', 'Tailwind CSS', 'Lucide React', 'React Helmet'],
     features: [
-      'Member management & registration system',
-      'Authentication & role-based owner panel',
-      'Fee & subscription/package management',
-      'Image upload for member profiles (Cloudinary)',
-      'Performance dashboard for the owner',
-      'Fully responsive UI',
+      'Responsive personal portfolio design',
+      'Project case studies with problem & solution sections',
+      'Interactive project screenshot galleries',
+      'Technical skills organized by category',
+      'Professional experience & education sections',
+      'Reusable React component architecture',
+      'Animated reveal interactions',
+      'SEO-friendly page titles & metadata',
+      'Mobile-first responsive interface',
+      'Professional social & contact integration',
     ],
-    github: 'https://github.com/raoofali/gym-management-system',
-    live: 'https://gym-management-system-ten-nu.vercel.app',
+    github: 'https://github.com/raoofali/abdul-raoof-portfolio',
+    live: 'https://abdul-raoof-portfolio-two.vercel.app/',
     featured: true,
     hasScreenshots: true,
     screenshots: [
-      '/projects/gym-dashboard.png',
-      '/projects/gym-fees.png',
-      '/projects/gym-login.png',
-      '/projects/gym-members.png',
+      '/projects/portfolio-home.png',
+      '/projects/portfolio-projects.png',
+      '/projects/portfolio-skills.png',
+      '/projects/portfolio-mobile.png',
     ],
   },
+
   {
     slug: 'medical-website',
     name: 'Medical Website',
@@ -208,7 +245,7 @@ export const projects: Project[] = [
     github: '',
     live: '',
     featured: false,
-    hasScreenshots: true,
+    hasScreenshots: false,
   },
 ];
 

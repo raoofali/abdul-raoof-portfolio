@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Github, Linkedin } from 'lucide-react';
 import { profile } from '@/data/profile';
@@ -16,6 +16,7 @@ const navItems = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -32,33 +33,48 @@ export function Navbar() {
           : 'border-b border-transparent bg-transparent'
       )}
     >
-      <nav className="container-page flex h-16 items-center justify-between font-display text-sm font-medium ...">
+      {/* FIXED: this previously ended with a literal "..." inside the
+          className string (a stray placeholder that never got cleaned up),
+          which Tailwind tried to treat as a class name and silently ignored. */}
+      <nav className="container-page flex h-16 items-center justify-between font-display text-sm font-medium">
         <Link
           to="/"
           className="font-mono text-sm font-medium text-ink hover:text-accent transition-colors"
           aria-label="Abdul Raoof — home"
         >
-          <span className="text-accent"></span>ABDUL RAOOF
+          ABDUL RAOOF
         </Link>
 
         <div className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.to === '/'}
-              className={({ isActive }) =>
-                cn(
-                  'rounded-md px-3 py-2 font-mono text-sm transition-colors',
-                  isActive
-                    ? 'text-accent'
-                    : 'text-ink-secondary hover:text-ink'
-                )
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
+          {navItems.map((item) => {
+            const isActive =
+              item.to === '/' ? location.pathname === '/' : location.pathname.startsWith(item.to);
+
+            return (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.to === '/'}
+                className="relative rounded-md px-3 py-2 font-mono text-sm"
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="nav-active-pill"
+                    className="absolute inset-0 rounded-md bg-accent-soft"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span
+                  className={cn(
+                    'relative z-10 transition-colors',
+                    isActive ? 'text-accent' : 'text-ink-secondary hover:text-ink'
+                  )}
+                >
+                  {item.label}
+                </span>
+              </NavLink>
+            );
+          })}
         </div>
 
         <div className="hidden items-center gap-3 md:flex">

@@ -45,7 +45,7 @@ export default function Resume() {
                 </p>
               </object>
 
-              {/* Fallback / placeholder notice until a real PDF is added */}
+              {/* Mobile fallback — inline PDF viewers are unreliable on phones */}
               <div className="flex flex-col items-center gap-3 p-12 text-center sm:hidden">
                 <FileWarning className="text-accent" size={28} />
                 <p className="text-ink-secondary">
@@ -53,10 +53,6 @@ export default function Resume() {
                 </p>
               </div>
             </div>
-            <p className="mt-4 font-mono text-xs text-ink-tertiary">
-              Note: this links to a placeholder file until the real resume PDF is added
-              at <code className="text-ink-secondary">public/resume.pdf</code>.
-            </p>
           </Reveal>
         </div>
       </section>

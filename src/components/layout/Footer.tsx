@@ -76,11 +76,11 @@ export function Footer() {
             </p>
 
             <a
-              href="mailto:raoofg46@gmail.com"
+              href={`mailto:${profile.email}`}
               className="mt-4 flex w-fit items-center gap-2 text-sm text-ink-secondary transition-colors hover:text-accent"
             >
               <Mail size={15} />
-              raoofg46@gmail.com
+              {profile.email}
             </a>
 
             <div className="mt-5 flex items-center gap-3">
@@ -96,7 +96,7 @@ export function Footer() {
               </a>
 
               <a
-                href="https://www.linkedin.com/in/abdul-raoof-b666861b1"
+                href={profile.social.linkedin}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="LinkedIn"
